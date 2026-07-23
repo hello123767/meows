@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mr Meows | Roblox Builder</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap');
 
     :root {
-      --ink: #17140e;
-      --paper: #fff7e1;
-      --cream: #f3e8c8;
-      --sky: #72b6dc;
-      --yellow: #ffd72f;
-      --red: #df5142;
-      --blue: #287bd4;
-      --green: #71ac47;
+      --black: #0d0d0d;
+      --black-2: #181818;
+      --black-3: #252525;
+      --orange: #f47a24;
+      --orange-light: #ffae4f;
+      --cream: #fff2df;
+      --gray: #aaa;
+      --line: rgba(255,255,255,.13);
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      color: var(--cream);
+      background: var(--black);
       font-family: Barlow, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--cream);
       overflow-x: hidden;
     }
 
@@ -32,398 +32,353 @@
 
     nav {
       height: 76px;
-      padding: 0 6%;
+      padding: 0 7%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: var(--cream);
-      border-bottom: 3px solid var(--ink);
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(13,13,13,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font: 900 20px "Barlow Condensed", sans-serif;
+      gap: 11px;
+      font: 900 21px "Barlow Condensed", sans-serif;
       letter-spacing: 1px;
     }
 
-    .brand-box {
+    .logo {
+      width: 39px;
+      height: 39px;
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      color: white;
-      background: var(--red);
-      border: 3px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      transform: rotate(-3deg);
+      border: 2px solid var(--orange);
+      color: var(--black);
+      background: var(--orange);
+      box-shadow: 4px 4px 0 #7a3410;
+      transform: rotate(-4deg);
     }
 
-    .links { display: flex; gap: 28px; }
-    .links a {
-      font: 800 14px "Barlow Condensed", sans-serif;
-      letter-spacing: 1px;
-      border-bottom: 3px solid transparent;
-      padding: 8px 0;
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      padding: 10px 0 7px;
+      border-bottom: 2px solid transparent;
+      font: 800 13px "Barlow Condensed", sans-serif;
+      letter-spacing: 1.3px;
     }
-    .links a:hover { border-color: var(--red); }
+
+    .nav-links a:hover { color: var(--orange); border-color: var(--orange); }
 
     .hero {
-      min-height: 760px;
-      padding: 90px 7% 130px;
+      min-height: 730px;
+      padding: 90px 7% 120px;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 60px;
+      grid-template-columns: 1.15fr .85fr;
       align-items: center;
+      gap: 70px;
       position: relative;
       overflow: hidden;
-      background-color: var(--sky);
-      background-image:
-        linear-gradient(rgba(255,255,255,.17) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(255,255,255,.17) 2px, transparent 2px);
-      background-size: 48px 48px;
-      border-bottom: 5px solid var(--ink);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(244,122,36,.25), transparent 26%),
+        linear-gradient(135deg, #171717, #090909 72%);
+      border-bottom: 1px solid var(--line);
     }
 
-    .hero::after {
+    .hero::before {
       content: "";
       position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 135px;
-      background: var(--green);
-      border-top: 4px solid var(--ink);
-      clip-path: polygon(0 55%, 15% 15%, 30% 55%, 45% 2%, 60% 52%, 76% 15%, 90% 58%, 100% 25%, 100% 100%, 0 100%);
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(45deg, transparent 47%, var(--orange) 48%, var(--orange) 52%, transparent 53%);
+      background-size: 50px 50px;
+      pointer-events: none;
     }
 
-    .hero-content, .profile-card { position: relative; z-index: 2; }
+    .hero-copy, .profile { position: relative; z-index: 1; }
 
-    .available {
+    .eyebrow {
       display: inline-block;
-      padding: 9px 13px;
-      border: 3px solid var(--ink);
-      background: var(--paper);
-      box-shadow: 4px 4px 0 var(--ink);
+      padding: 8px 12px;
+      color: var(--orange-light);
+      border: 1px solid rgba(244,122,36,.7);
+      background: rgba(244,122,36,.1);
       font: 900 12px "Barlow Condensed", sans-serif;
-      letter-spacing: 1px;
-      transform: rotate(-1deg);
+      letter-spacing: 1.2px;
     }
 
-    .dot {
+    .live {
+      width: 8px;
+      height: 8px;
       display: inline-block;
-      width: 9px; height: 9px;
-      margin-right: 5px;
-      background: #5cb34d;
-      border: 2px solid var(--ink);
+      margin-right: 6px;
       border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 10px var(--orange);
     }
 
     h1, h2, h3 { font-family: "Barlow Condensed", sans-serif; }
 
     h1 {
-      margin: 25px 0 20px;
-      font-size: clamp(58px, 7vw, 110px);
-      line-height: .84;
+      max-width: 760px;
+      margin: 22px 0;
+      font-size: clamp(64px, 8vw, 115px);
+      line-height: .82;
       letter-spacing: -2px;
-      text-shadow: 4px 4px 0 rgba(255,255,255,.45);
     }
 
     h1 span {
-      color: var(--yellow);
-      -webkit-text-stroke: 3px var(--ink);
-      text-shadow: 5px 5px 0 var(--ink);
+      color: var(--orange);
+      text-shadow: 5px 5px 0 #7a3410;
     }
 
     .intro {
       max-width: 630px;
+      color: #d2d2d2;
       font-size: 19px;
-      line-height: 1.55;
-      font-weight: 600;
+      line-height: 1.6;
     }
 
-    .buttons { display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0; }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin: 30px 0;
+    }
 
     .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
       min-height: 54px;
-      padding: 0 20px;
-      border: 3px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 19px;
+      border: 2px solid var(--orange);
       font: 900 14px "Barlow Condensed", sans-serif;
       letter-spacing: 1px;
-      transition: .15s;
+      transition: .16s;
     }
 
-    .button:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
-    .yellow { background: var(--yellow); }
-    .white { background: var(--paper); }
-    .blue { background: var(--blue); color: white; }
+    .button:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #7a3410; }
+    .button.orange { color: #111; background: var(--orange); }
+    .button.dark { color: var(--cream); background: rgba(255,255,255,.04); border-color: #555; }
 
-    .stats { display: flex; gap: 28px; }
-    .stat {
-      border-left: 3px solid var(--ink);
-      padding-left: 10px;
-      display: flex;
-      flex-direction: column;
-    }
-    .stat b { font: 900 23px "Barlow Condensed", sans-serif; }
-    .stat span { font: 900 10px "Barlow Condensed", sans-serif; letter-spacing: .8px; }
+    .stats { display: flex; gap: 30px; }
+    .stat { padding-left: 11px; border-left: 3px solid var(--orange); }
+    .stat b { display: block; font: 900 25px "Barlow Condensed", sans-serif; }
+    .stat span { color: var(--gray); font: 800 10px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
 
-    .profile-card {
-      width: min(410px, 100%);
+    .profile {
+      width: min(390px, 100%);
       margin: auto;
-      background: var(--paper);
-      border: 4px solid var(--ink);
-      box-shadow: 12px 12px 0 var(--ink);
+      background: #171717;
+      border: 2px solid var(--orange);
+      box-shadow: 12px 12px 0 #552209;
       transform: rotate(2deg);
     }
 
-    .profile-top {
+    .profile-head {
       display: flex;
       justify-content: space-between;
-      padding: 13px;
-      background: var(--blue);
-      color: white;
-      border-bottom: 4px solid var(--ink);
+      padding: 12px;
+      color: #121212;
+      background: var(--orange);
       font: 900 12px "Barlow Condensed", sans-serif;
       letter-spacing: 1px;
     }
 
-    .profile-body { padding: 28px; text-align: center; }
+    .profile-main { padding: 30px; text-align: center; }
 
     .pfp {
-      width: 180px;
-      height: 180px;
-      margin: auto;
-      display: grid;
-      place-items: center;
+      width: 190px;
+      height: 190px;
       overflow: hidden;
-      border: 5px solid var(--ink);
-      outline: 8px solid var(--yellow);
-      background: #20201f;
-      box-shadow: 7px 7px 0 var(--ink);
+      margin: auto;
+      border: 3px solid var(--orange);
       border-radius: 50%;
-      font-size: 76px;
+      box-shadow: 0 0 0 8px #25150c, 0 0 0 10px var(--orange);
     }
 
     .pfp img { width: 100%; height: 100%; object-fit: cover; }
 
     .online {
       display: inline-block;
-      margin-top: 20px;
-      padding: 5px 10px;
-      background: #cce9b8;
-      border: 2px solid var(--ink);
+      margin-top: 19px;
+      padding: 5px 9px;
+      color: var(--orange-light);
+      border: 1px solid var(--orange);
       font: 900 10px "Barlow Condensed", sans-serif;
       letter-spacing: 1px;
     }
 
-    .profile-body h2 { margin: 16px 0 4px; font-size: 38px; }
-    .profile-body p { margin: 0; font: 800 11px "Barlow Condensed", sans-serif; color: #5c5549; letter-spacing: .5px; }
+    .profile h2 { margin: 15px 0 4px; font-size: 38px; }
+    .profile p { margin: 0; color: var(--gray); font: 800 11px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
 
-    .level { margin-top: 22px; text-align: left; font: 900 10px "Barlow Condensed", sans-serif; }
-    .level b { float: right; }
-    .bar {
-      clear: both;
-      margin-top: 8px;
-      height: 14px;
-      border: 3px solid var(--ink);
-      background: linear-gradient(90deg, var(--red) 0 65%, #d8ccb1 65%);
-    }
+    .skill-label { margin-top: 24px; text-align: left; color: var(--orange-light); font: 900 10px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
+    .skill-bar { height: 12px; margin-top: 8px; background: #373737; border: 1px solid #777; }
+    .skill-fill { width: 76%; height: 100%; background: var(--orange); }
 
-    section { padding: 95px 7%; }
+    section { padding: 100px 7%; }
 
-    .section-head {
-      max-width: 1250px;
-      margin: auto auto 40px;
+    .section-title {
+      max-width: 1280px;
+      margin: 0 auto 38px;
       display: flex;
+      align-items: end;
       justify-content: space-between;
       gap: 25px;
-      align-items: end;
     }
 
-    .section-head h2 { margin: 0; font-size: clamp(42px, 5vw, 65px); }
-    .section-head p { max-width: 390px; font-weight: 600; }
-
-    .number {
-      display: inline-grid;
-      place-items: center;
-      width: 43px; height: 43px;
-      margin-right: 12px;
-      color: white;
-      background: var(--red);
-      border: 3px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      font: 900 14px "Barlow Condensed", sans-serif;
-      vertical-align: middle;
-    }
+    .section-title h2 { margin: 0; font-size: clamp(47px, 6vw, 74px); line-height: .9; }
+    .section-title h2 span { color: var(--orange); }
+    .section-title p { max-width: 390px; margin: 0; color: var(--gray); font-weight: 600; line-height: 1.5; }
 
     .gallery {
-      max-width: 1250px;
+      max-width: 1280px;
       margin: auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      gap: 23px;
     }
 
-    .build {
+    .card {
       overflow: hidden;
-      text-align: left;
-      border: 3px solid var(--ink);
-      background: var(--paper);
-      box-shadow: 7px 7px 0 var(--ink);
-      transition: .15s;
+      background: var(--black-2);
+      border: 1px solid #464646;
+      transition: .2s;
     }
 
-    .build:hover { transform: translate(-3px,-4px); box-shadow: 11px 12px 0 var(--ink); }
-
-    .build-image {
-      height: 270px;
-      display: grid;
-      place-items: center;
-      border-bottom: 3px solid var(--ink);
-      background-image:
-        linear-gradient(30deg, rgba(255,255,255,.13) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.13) 87.5%),
-        linear-gradient(150deg, rgba(255,255,255,.13) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.13) 87.5%);
-      background-size: 75px 130px;
-      color: white;
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: var(--orange);
+      box-shadow: 0 12px 0 #592509;
     }
 
-    .build-image b {
-      font: 900 38px "Barlow Condensed", sans-serif;
-      -webkit-text-stroke: 2px var(--ink);
-      text-shadow: 4px 4px 0 var(--ink);
+    .card img {
+      width: 100%;
+      height: 310px;
+      display: block;
+      object-fit: cover;
+      filter: saturate(.94) contrast(1.05);
+      transition: .3s;
     }
 
-    .roman { background-color: #c78e4f; }
-    .forest { background-color: #4f985d; }
-    .medieval { background-color: #85594f; }
-    .island { background-color: #258fb8; }
-    .arena { background-color: #7862bd; }
-    .stadium { background-color: #4e9668; }
+    .card:hover img { transform: scale(1.04); }
 
-    .build-info { padding: 18px; display: flex; align-items: center; gap: 16px; }
-    .build-info span { color: var(--red); font: 900 27px "Barlow Condensed", sans-serif; }
-    .build-info h3 { margin: 0; font-size: 25px; }
-    .build-info p { margin: 2px 0 0; font: 800 11px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
+    .card-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px;
+      border-top: 1px solid #484848;
+    }
+
+    .card-number { color: var(--orange); font: 900 30px "Barlow Condensed", sans-serif; }
+    .card h3 { margin: 0; font-size: 26px; }
+    .card p { margin: 3px 0 0; color: var(--gray); font: 800 11px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
 
     .about {
       display: grid;
-      grid-template-columns: .85fr 1.15fr;
+      grid-template-columns: .9fr 1.1fr;
       gap: 70px;
       align-items: center;
-      background: var(--yellow);
-      border-block: 5px solid var(--ink);
+      background: #151515;
+      border-block: 1px solid var(--line);
     }
 
-    .kicker { font: 900 12px "Barlow Condensed", sans-serif; letter-spacing: 2px; }
-    .about h2, .contact h2 { margin: 14px 0; font-size: clamp(48px, 6vw, 80px); line-height: .9; }
-    .about h2 span, .contact h2 span {
-      color: var(--red);
-      -webkit-text-stroke: 2px var(--ink);
-      text-shadow: 3px 3px 0 var(--ink);
-    }
+    .kicker { color: var(--orange); font: 900 12px "Barlow Condensed", sans-serif; letter-spacing: 2px; }
+    .about h2, .contact h2 { margin: 15px 0; font-size: clamp(52px, 6vw, 83px); line-height: .88; }
+    .about h2 span, .contact h2 span { color: var(--orange); }
 
-    .about p { font-size: 17px; line-height: 1.6; font-weight: 600; }
+    .about-copy > p:not(.kicker) { color: #c7c7c7; font-size: 17px; line-height: 1.65; }
 
     .skills {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      border: 4px solid var(--ink);
-      background: #c9b898;
-      box-shadow: 10px 10px 0 var(--ink);
-      padding: 12px;
       gap: 10px;
     }
 
     .skill {
-      min-height: 105px;
+      min-height: 112px;
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 10px;
-      background: #eadcbd;
-      border: 3px solid var(--ink);
-      font: 900 13px "Barlow Condensed", sans-serif;
-      letter-spacing: .4px;
+      padding: 13px;
+      border: 1px solid #555;
+      background: #202020;
+      color: var(--orange-light);
+      font: 900 15px "Barlow Condensed", sans-serif;
+      letter-spacing: .7px;
     }
 
-    .process { background: #27251f; color: var(--paper); }
+    .process { background: #090909; }
 
     .steps {
-      max-width: 1250px;
+      max-width: 1280px;
       margin: auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border: 3px solid var(--paper);
+      border: 1px solid #555;
     }
 
-    .step {
-      min-height: 250px;
-      padding: 25px;
-      border-right: 3px solid var(--paper);
-    }
-
+    .step { min-height: 260px; padding: 24px; border-right: 1px solid #555; }
     .step:last-child { border: 0; }
-    .step b { color: #555047; font: 900 55px "Barlow Condensed", sans-serif; }
-    .step h3 { margin: 10px 0; font-size: 24px; }
-    .step p { color: #cac2ae; line-height: 1.5; }
+    .step b { color: #4c4c4c; font: 900 58px "Barlow Condensed", sans-serif; }
+    .step h3 { margin: 8px 0; color: var(--orange-light); font-size: 25px; }
+    .step p { color: #aaa; line-height: 1.55; }
 
     .contact {
       text-align: center;
-      background-color: #e8dabc;
-      background-image: radial-gradient(#b8a87f 2px, transparent 2px);
-      background-size: 20px 20px;
+      background:
+        radial-gradient(circle at center, rgba(244,122,36,.17), transparent 45%),
+        #151515;
     }
 
-    .contact > p { font-size: 18px; font-weight: 600; }
+    .contact > p { color: #c7c7c7; font-size: 18px; }
+    .contact .button-row { justify-content: center; }
 
     footer {
-      padding: 26px 7%;
+      padding: 27px 7%;
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      color: white;
-      background: var(--red);
-      font: 800 12px "Barlow Condensed", sans-serif;
+      background: var(--orange);
+      color: var(--black);
+      font: 900 13px "Barlow Condensed", sans-serif;
       letter-spacing: 1px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 850px) {
       .hero, .about { grid-template-columns: 1fr; }
-      .hero { padding-top: 65px; }
+      .hero { padding-top: 80px; }
       .gallery { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
-      .step { border-right: 0; border-bottom: 3px solid var(--paper); }
-      .section-head { flex-direction: column; align-items: start; }
-      .links { gap: 12px; }
-      .links a { font-size: 11px; }
+      .step { border-right: 0; border-bottom: 1px solid #555; }
+      .section-title { align-items: start; flex-direction: column; }
     }
 
-    @media (max-width: 500px) {
-      nav { padding: 0 20px; }
-      .links { display: none; }
-      section, .hero { padding-left: 20px; padding-right: 20px; }
+    @media (max-width: 520px) {
+      nav, section, .hero { padding-left: 21px; padding-right: 21px; }
+      .nav-links { display: none; }
       .hero { min-height: 930px; }
       .stats { gap: 13px; }
       .stat b { font-size: 18px; }
       .stat span { font-size: 8px; }
-      footer { flex-direction: column; text-align: center; }
+      .card img { height: 230px; }
+      footer { align-items: center; flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="#" class="brand">
-      <span class="brand-box">M</span>
-      <span>MR MEOWS</span>
-    </a>
-    <div class="links">
-      <a href="#builds">WORK</a>
+    <a class="brand" href="#"><span class="logo">M</span> MR MEOWS</a>
+    <div class="nav-links">
+      <a href="#work">WORK</a>
       <a href="#about">ABOUT</a>
       <a href="#process">PROCESS</a>
       <a href="#contact">CONTACT</a>
@@ -432,19 +387,14 @@
 
   <main>
     <section class="hero">
-      <div class="hero-content">
-        <div class="available"><span class="dot"></span>AVAILABLE FOR COMMISSIONS</div>
-        <h1>BUILDING WORLDS<br>ONE <span>STUD</span> AT A TIME.</h1>
-        <p class="intro">
-          I’m Mr Meows, a Roblox builder focused on nostalgic stud-style maps,
-          playful environments, and spaces that feel good to explore.
-        </p>
-
-        <div class="buttons">
-          <a class="button yellow" href="#builds">VIEW MY BUILDS →</a>
-          <a class="button white" href="#contact">HIRE ME</a>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live"></span>AVAILABLE FOR COMMISSIONS</div>
+        <h1>BUILDING WORLDS<br>ONE <span>STUD</span><br>AT A TIME.</h1>
+        <p class="intro">I’m Mr Meows, a Roblox builder focused on classic stud-style maps, bold environments, and spaces that feel memorable to explore.</p>
+        <div class="button-row">
+          <a class="button orange" href="#work">VIEW MY BUILDS →</a>
+          <a class="button dark" href="#contact">HIRE ME</a>
         </div>
-
         <div class="stats">
           <div class="stat"><b>2+</b><span>YEARS IN STUDIO</span></div>
           <div class="stat"><b>FAST</b><span>TURNAROUNDS</span></div>
@@ -452,100 +402,96 @@
         </div>
       </div>
 
-      <div class="profile-card">
-        <div class="profile-top"><span>PLAYER_PROFILE.RBX</span><span>×</span></div>
-        <div class="profile-body">
-          <div class="pfp">🐈</div>
-          <div class="online"><span class="dot"></span>ONLINE</div>
+      <div class="profile">
+        <div class="profile-head"><span>PLAYER_PROFILE.RBX</span><span>×</span></div>
+        <div class="profile-main">
+          <div class="pfp">
+            <img src="Screenshot%202026-07-22%20201309.png" alt="Mr Meows cat profile picture">
+          </div>
+          <div class="online"><span class="live"></span>ONLINE</div>
           <h2>MR MEOWS</h2>
           <p>ROBLOX BUILDER<br>ENVIRONMENT DESIGNER</p>
-          <div class="level">BUILD SKILL <b>LV. 02</b><div class="bar"></div></div>
+          <div class="skill-label">BUILD SKILL — LV. 02<div class="skill-bar"><div class="skill-fill"></div></div></div>
         </div>
       </div>
     </section>
 
-    <section id="builds">
-      <div class="section-head">
-        <div>
-          <span class="number">01</span>
-          <h2 style="display:inline;">SELECTED BUILDS</h2>
-        </div>
-        <p>A mix of environments, maps, and structures made inside Roblox Studio.</p>
+    <section id="work">
+      <div class="section-title">
+        <div><p class="kicker">01 — PORTFOLIO</p><h2>SELECTED <span>BUILDS</span></h2></div>
+        <p>A collection of classic Roblox environments, maps, architecture, and detailed stud-style builds.</p>
       </div>
 
       <div class="gallery">
-        <article class="build">
-          <div class="build-image roman"><b>ROMAN CITY</b></div>
-          <div class="build-info"><span>01</span><div><h3>Roman City</h3><p>ROMAN / STUD STYLE</p></div></div>
+        <article class="card">
+          <img src="Screenshot%202026-07-22%20201632.png" alt="Tropical lighthouse island build">
+          <div class="card-info"><span class="card-number">01</span><div><h3>Tropical Island</h3><p>ISLAND / ENVIRONMENT</p></div></div>
         </article>
-        <article class="build">
-          <div class="build-image forest"><b>FANTASY FOREST</b></div>
-          <div class="build-info"><span>02</span><div><h3>Fantasy Forest</h3><p>FANTASY / NATURE</p></div></div>
+
+        <article class="card">
+          <img src="Screenshot%202026-07-22%20184110.png" alt="Roman colosseum build">
+          <div class="card-info"><span class="card-number">02</span><div><h3>Roman Colosseum</h3><p>ROMAN / ARCHITECTURE</p></div></div>
         </article>
-        <article class="build">
-          <div class="build-image medieval"><b>MEDIEVAL MAP</b></div>
-          <div class="build-info"><span>03</span><div><h3>Medieval Village</h3><p>MEDIEVAL / MAP</p></div></div>
+
+        <article class="card">
+          <img src="Screenshot%202026-07-22%20184104.png" alt="Subway build">
+          <div class="card-info"><span class="card-number">03</span><div><h3>Subway Station</h3><p>URBAN / INTERIOR</p></div></div>
         </article>
-        <article class="build">
-          <div class="build-image island"><b>ISLAND BORDER</b></div>
-          <div class="build-info"><span>04</span><div><h3>Island Border</h3><p>LOW-POLY / TERRAIN</p></div></div>
+
+        <article class="card">
+          <img src="Screenshot%202026-07-22%20183448.png" alt="Pizza restaurant build">
+          <div class="card-info"><span class="card-number">04</span><div><h3>Pizza Restaurant</h3><p>CLASSIC STUD / EXTERIOR</p></div></div>
         </article>
-        <article class="build">
-          <div class="build-image arena"><b>TAG ARENA</b></div>
-          <div class="build-info"><span>05</span><div><h3>Tag Arena</h3><p>GAMEPLAY / ARENA</p></div></div>
-        </article>
-        <article class="build">
-          <div class="build-image stadium"><b>STADIUM</b></div>
-          <div class="build-info"><span>06</span><div><h3>Soccer Stadium</h3><p>SPORTS / LARGE SCALE</p></div></div>
+
+        <article class="card">
+          <img src="Screenshot%202026-07-22%20184114.png" alt="Lighthouse island build">
+          <div class="card-info"><span class="card-number">05</span><div><h3>Lighthouse Islands</h3><p>LOW-POLY / TERRAIN</p></div></div>
         </article>
       </div>
     </section>
 
     <section class="about" id="about">
-      <div>
+      <div class="about-copy">
         <p class="kicker">PLAYER BIO</p>
-        <h2>I MAKE ROBLOX MAPS THAT FEEL <span>ALIVE.</span></h2>
-        <p>I have around two years of experience in Roblox Studio. My main style is classic stud building, but I can adapt to fantasy, medieval, Roman, low-poly, mid-poly, and modern projects.</p>
-        <p>I work quickly, follow references closely, and care about making every environment polished and playable.</p>
+        <h2>I MAKE MAPS THAT FEEL <span>ALIVE.</span></h2>
+        <p>I’ve been building in Roblox Studio for around two years. My main style is classic Roblox stud building, but I can also adapt to fantasy, medieval, Roman, low-poly, mid-poly, and modern projects.</p>
+        <p>I work quickly, follow references closely, and focus on making builds that are both good-looking and playable.</p>
       </div>
 
       <div class="skills">
         <div class="skill">CLASSIC STUD STYLE</div>
         <div class="skill">ENVIRONMENT DESIGN</div>
-        <div class="skill">FANTASY MAPS</div>
-        <div class="skill">MEDIEVAL BUILDS</div>
         <div class="skill">ROMAN ARCHITECTURE</div>
         <div class="skill">LOW & MID POLY</div>
         <div class="skill">TERRAIN DESIGN</div>
         <div class="skill">LIGHTING & ATMOSPHERE</div>
+        <div class="skill">ISLANDS & MAPS</div>
+        <div class="skill">INTERIORS & EXTERIORS</div>
       </div>
     </section>
 
     <section class="process" id="process">
-      <div class="section-head">
-        <div>
-          <span class="number" style="background:#287bd4;">02</span>
-          <h2 style="display:inline;">HOW I WORK</h2>
-        </div>
+      <div class="section-title">
+        <div><p class="kicker">02 — WORKFLOW</p><h2>HOW I <span>WORK</span></h2></div>
       </div>
 
       <div class="steps">
-        <article class="step"><b>01</b><h3>Send the idea</h3><p>Share your reference, map size, building style, deadline, and budget.</p></article>
-        <article class="step"><b>02</b><h3>Plan the world</h3><p>I block out the layout and major structures before filling in details.</p></article>
-        <article class="step"><b>03</b><h3>Build it</h3><p>I create the terrain, structures, lighting, and atmosphere.</p></article>
-        <article class="step"><b>04</b><h3>Polish & deliver</h3><p>I refine the map, optimize it, and make agreed revisions.</p></article>
+        <article class="step"><b>01</b><h3>Send the idea</h3><p>Share your references, map size, style, deadline, and budget.</p></article>
+        <article class="step"><b>02</b><h3>Plan the world</h3><p>I block out the major layout and structures before building details.</p></article>
+        <article class="step"><b>03</b><h3>Build it</h3><p>I create the structures, terrain, lighting, and atmosphere.</p></article>
+        <article class="step"><b>04</b><h3>Polish & deliver</h3><p>I refine the map, optimize it, and handle agreed revisions.</p></article>
       </div>
     </section>
 
     <section class="contact" id="contact">
       <p class="kicker">NEW QUEST AVAILABLE</p>
       <h2>LET’S BUILD SOMETHING<br><span>MEMORABLE.</span></h2>
-      <p>Have a map idea or need an environment for your Roblox game? Let’s talk.</p>
-      <div class="buttons" style="justify-content:center;">
-        <a class="button yellow" href="https://discord.com">DISCORD ↗</a>
-        <a class="button blue" href="https://www.roblox.com">ROBLOX PROFILE ↗</a>
+      <p>Need a Roblox map, environment, or custom build? Let’s talk.</p>
+      <div class="button-row">
+        <a class="button orange" href="https://discord.com">DISCORD ↗</a>
+        <a class="button dark" href="https://www.roblox.com">ROBLOX PROFILE ↗</a>
       </div>
-      <p style="font-size:12px;">Replace the Discord and Roblox links with your real links later.</p>
+      <p style="font-size:12px;">Replace these links with your real Discord and Roblox links later.</p>
     </section>
   </main>
 
