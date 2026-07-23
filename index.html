@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mr Meows | Roblox Builder</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #17140e;
+      --paper: #fff7e1;
+      --cream: #f3e8c8;
+      --sky: #72b6dc;
+      --yellow: #ffd72f;
+      --red: #df5142;
+      --blue: #287bd4;
+      --green: #71ac47;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Barlow, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      height: 76px;
+      padding: 0 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--cream);
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font: 900 20px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .brand-box {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: white;
+      background: var(--red);
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      transform: rotate(-3deg);
+    }
+
+    .links { display: flex; gap: 28px; }
+    .links a {
+      font: 800 14px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+      border-bottom: 3px solid transparent;
+      padding: 8px 0;
+    }
+    .links a:hover { border-color: var(--red); }
+
+    .hero {
+      min-height: 760px;
+      padding: 90px 7% 130px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--sky);
+      background-image:
+        linear-gradient(rgba(255,255,255,.17) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255,255,255,.17) 2px, transparent 2px);
+      background-size: 48px 48px;
+      border-bottom: 5px solid var(--ink);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 135px;
+      background: var(--green);
+      border-top: 4px solid var(--ink);
+      clip-path: polygon(0 55%, 15% 15%, 30% 55%, 45% 2%, 60% 52%, 76% 15%, 90% 58%, 100% 25%, 100% 100%, 0 100%);
+    }
+
+    .hero-content, .profile-card { position: relative; z-index: 2; }
+
+    .available {
+      display: inline-block;
+      padding: 9px 13px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      font: 900 12px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+      transform: rotate(-1deg);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 9px; height: 9px;
+      margin-right: 5px;
+      background: #5cb34d;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    h1, h2, h3 { font-family: "Barlow Condensed", sans-serif; }
+
+    h1 {
+      margin: 25px 0 20px;
+      font-size: clamp(58px, 7vw, 110px);
+      line-height: .84;
+      letter-spacing: -2px;
+      text-shadow: 4px 4px 0 rgba(255,255,255,.45);
+    }
+
+    h1 span {
+      color: var(--yellow);
+      -webkit-text-stroke: 3px var(--ink);
+      text-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .intro {
+      max-width: 630px;
+      font-size: 19px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0; }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      min-height: 54px;
+      padding: 0 20px;
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      font: 900 14px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+      transition: .15s;
+    }
+
+    .button:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+    .yellow { background: var(--yellow); }
+    .white { background: var(--paper); }
+    .blue { background: var(--blue); color: white; }
+
+    .stats { display: flex; gap: 28px; }
+    .stat {
+      border-left: 3px solid var(--ink);
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat b { font: 900 23px "Barlow Condensed", sans-serif; }
+    .stat span { font: 900 10px "Barlow Condensed", sans-serif; letter-spacing: .8px; }
+
+    .profile-card {
+      width: min(410px, 100%);
+      margin: auto;
+      background: var(--paper);
+      border: 4px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--ink);
+      transform: rotate(2deg);
+    }
+
+    .profile-top {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px;
+      background: var(--blue);
+      color: white;
+      border-bottom: 4px solid var(--ink);
+      font: 900 12px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .profile-body { padding: 28px; text-align: center; }
+
+    .pfp {
+      width: 180px;
+      height: 180px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 5px solid var(--ink);
+      outline: 8px solid var(--yellow);
+      background: #20201f;
+      box-shadow: 7px 7px 0 var(--ink);
+      border-radius: 50%;
+      font-size: 76px;
+    }
+
+    .pfp img { width: 100%; height: 100%; object-fit: cover; }
+
+    .online {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 5px 10px;
+      background: #cce9b8;
+      border: 2px solid var(--ink);
+      font: 900 10px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .profile-body h2 { margin: 16px 0 4px; font-size: 38px; }
+    .profile-body p { margin: 0; font: 800 11px "Barlow Condensed", sans-serif; color: #5c5549; letter-spacing: .5px; }
+
+    .level { margin-top: 22px; text-align: left; font: 900 10px "Barlow Condensed", sans-serif; }
+    .level b { float: right; }
+    .bar {
+      clear: both;
+      margin-top: 8px;
+      height: 14px;
+      border: 3px solid var(--ink);
+      background: linear-gradient(90deg, var(--red) 0 65%, #d8ccb1 65%);
+    }
+
+    section { padding: 95px 7%; }
+
+    .section-head {
+      max-width: 1250px;
+      margin: auto auto 40px;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      align-items: end;
+    }
+
+    .section-head h2 { margin: 0; font-size: clamp(42px, 5vw, 65px); }
+    .section-head p { max-width: 390px; font-weight: 600; }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 43px; height: 43px;
+      margin-right: 12px;
+      color: white;
+      background: var(--red);
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      font: 900 14px "Barlow Condensed", sans-serif;
+      vertical-align: middle;
+    }
+
+    .gallery {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .build {
+      overflow: hidden;
+      text-align: left;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 7px 7px 0 var(--ink);
+      transition: .15s;
+    }
+
+    .build:hover { transform: translate(-3px,-4px); box-shadow: 11px 12px 0 var(--ink); }
+
+    .build-image {
+      height: 270px;
+      display: grid;
+      place-items: center;
+      border-bottom: 3px solid var(--ink);
+      background-image:
+        linear-gradient(30deg, rgba(255,255,255,.13) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.13) 87.5%),
+        linear-gradient(150deg, rgba(255,255,255,.13) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.13) 87.5%);
+      background-size: 75px 130px;
+      color: white;
+    }
+
+    .build-image b {
+      font: 900 38px "Barlow Condensed", sans-serif;
+      -webkit-text-stroke: 2px var(--ink);
+      text-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .roman { background-color: #c78e4f; }
+    .forest { background-color: #4f985d; }
+    .medieval { background-color: #85594f; }
+    .island { background-color: #258fb8; }
+    .arena { background-color: #7862bd; }
+    .stadium { background-color: #4e9668; }
+
+    .build-info { padding: 18px; display: flex; align-items: center; gap: 16px; }
+    .build-info span { color: var(--red); font: 900 27px "Barlow Condensed", sans-serif; }
+    .build-info h3 { margin: 0; font-size: 25px; }
+    .build-info p { margin: 2px 0 0; font: 800 11px "Barlow Condensed", sans-serif; letter-spacing: 1px; }
+
+    .about {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 70px;
+      align-items: center;
+      background: var(--yellow);
+      border-block: 5px solid var(--ink);
+    }
+
+    .kicker { font: 900 12px "Barlow Condensed", sans-serif; letter-spacing: 2px; }
+    .about h2, .contact h2 { margin: 14px 0; font-size: clamp(48px, 6vw, 80px); line-height: .9; }
+    .about h2 span, .contact h2 span {
+      color: var(--red);
+      -webkit-text-stroke: 2px var(--ink);
+      text-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .about p { font-size: 17px; line-height: 1.6; font-weight: 600; }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 4px solid var(--ink);
+      background: #c9b898;
+      box-shadow: 10px 10px 0 var(--ink);
+      padding: 12px;
+      gap: 10px;
+    }
+
+    .skill {
+      min-height: 105px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px;
+      background: #eadcbd;
+      border: 3px solid var(--ink);
+      font: 900 13px "Barlow Condensed", sans-serif;
+      letter-spacing: .4px;
+    }
+
+    .process { background: #27251f; color: var(--paper); }
+
+    .steps {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 3px solid var(--paper);
+    }
+
+    .step {
+      min-height: 250px;
+      padding: 25px;
+      border-right: 3px solid var(--paper);
+    }
+
+    .step:last-child { border: 0; }
+    .step b { color: #555047; font: 900 55px "Barlow Condensed", sans-serif; }
+    .step h3 { margin: 10px 0; font-size: 24px; }
+    .step p { color: #cac2ae; line-height: 1.5; }
+
+    .contact {
+      text-align: center;
+      background-color: #e8dabc;
+      background-image: radial-gradient(#b8a87f 2px, transparent 2px);
+      background-size: 20px 20px;
+    }
+
+    .contact > p { font-size: 18px; font-weight: 600; }
+
+    footer {
+      padding: 26px 7%;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: white;
+      background: var(--red);
+      font: 800 12px "Barlow Condensed", sans-serif;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 800px) {
+      .hero, .about { grid-template-columns: 1fr; }
+      .hero { padding-top: 65px; }
+      .gallery { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: 0; border-bottom: 3px solid var(--paper); }
+      .section-head { flex-direction: column; align-items: start; }
+      .links { gap: 12px; }
+      .links a { font-size: 11px; }
+    }
+
+    @media (max-width: 500px) {
+      nav { padding: 0 20px; }
+      .links { display: none; }
+      section, .hero { padding-left: 20px; padding-right: 20px; }
+      .hero { min-height: 930px; }
+      .stats { gap: 13px; }
+      .stat b { font-size: 18px; }
+      .stat span { font-size: 8px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="brand">
+      <span class="brand-box">M</span>
+      <span>MR MEOWS</span>
+    </a>
+    <div class="links">
+      <a href="#builds">WORK</a>
+      <a href="#about">ABOUT</a>
+      <a href="#process">PROCESS</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="available"><span class="dot"></span>AVAILABLE FOR COMMISSIONS</div>
+        <h1>BUILDING WORLDS<br>ONE <span>STUD</span> AT A TIME.</h1>
+        <p class="intro">
+          I’m Mr Meows, a Roblox builder focused on nostalgic stud-style maps,
+          playful environments, and spaces that feel good to explore.
+        </p>
+
+        <div class="buttons">
+          <a class="button yellow" href="#builds">VIEW MY BUILDS →</a>
+          <a class="button white" href="#contact">HIRE ME</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>2+</b><span>YEARS IN STUDIO</span></div>
+          <div class="stat"><b>FAST</b><span>TURNAROUNDS</span></div>
+          <div class="stat"><b>100%</b><span>CUSTOM BUILDS</span></div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-top"><span>PLAYER_PROFILE.RBX</span><span>×</span></div>
+        <div class="profile-body">
+          <div class="pfp">🐈</div>
+          <div class="online"><span class="dot"></span>ONLINE</div>
+          <h2>MR MEOWS</h2>
+          <p>ROBLOX BUILDER<br>ENVIRONMENT DESIGNER</p>
+          <div class="level">BUILD SKILL <b>LV. 02</b><div class="bar"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="builds">
+      <div class="section-head">
+        <div>
+          <span class="number">01</span>
+          <h2 style="display:inline;">SELECTED BUILDS</h2>
+        </div>
+        <p>A mix of environments, maps, and structures made inside Roblox Studio.</p>
+      </div>
+
+      <div class="gallery">
+        <article class="build">
+          <div class="build-image roman"><b>ROMAN CITY</b></div>
+          <div class="build-info"><span>01</span><div><h3>Roman City</h3><p>ROMAN / STUD STYLE</p></div></div>
+        </article>
+        <article class="build">
+          <div class="build-image forest"><b>FANTASY FOREST</b></div>
+          <div class="build-info"><span>02</span><div><h3>Fantasy Forest</h3><p>FANTASY / NATURE</p></div></div>
+        </article>
+        <article class="build">
+          <div class="build-image medieval"><b>MEDIEVAL MAP</b></div>
+          <div class="build-info"><span>03</span><div><h3>Medieval Village</h3><p>MEDIEVAL / MAP</p></div></div>
+        </article>
+        <article class="build">
+          <div class="build-image island"><b>ISLAND BORDER</b></div>
+          <div class="build-info"><span>04</span><div><h3>Island Border</h3><p>LOW-POLY / TERRAIN</p></div></div>
+        </article>
+        <article class="build">
+          <div class="build-image arena"><b>TAG ARENA</b></div>
+          <div class="build-info"><span>05</span><div><h3>Tag Arena</h3><p>GAMEPLAY / ARENA</p></div></div>
+        </article>
+        <article class="build">
+          <div class="build-image stadium"><b>STADIUM</b></div>
+          <div class="build-info"><span>06</span><div><h3>Soccer Stadium</h3><p>SPORTS / LARGE SCALE</p></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div>
+        <p class="kicker">PLAYER BIO</p>
+        <h2>I MAKE ROBLOX MAPS THAT FEEL <span>ALIVE.</span></h2>
+        <p>I have around two years of experience in Roblox Studio. My main style is classic stud building, but I can adapt to fantasy, medieval, Roman, low-poly, mid-poly, and modern projects.</p>
+        <p>I work quickly, follow references closely, and care about making every environment polished and playable.</p>
+      </div>
+
+      <div class="skills">
+        <div class="skill">CLASSIC STUD STYLE</div>
+        <div class="skill">ENVIRONMENT DESIGN</div>
+        <div class="skill">FANTASY MAPS</div>
+        <div class="skill">MEDIEVAL BUILDS</div>
+        <div class="skill">ROMAN ARCHITECTURE</div>
+        <div class="skill">LOW & MID POLY</div>
+        <div class="skill">TERRAIN DESIGN</div>
+        <div class="skill">LIGHTING & ATMOSPHERE</div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="section-head">
+        <div>
+          <span class="number" style="background:#287bd4;">02</span>
+          <h2 style="display:inline;">HOW I WORK</h2>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step"><b>01</b><h3>Send the idea</h3><p>Share your reference, map size, building style, deadline, and budget.</p></article>
+        <article class="step"><b>02</b><h3>Plan the world</h3><p>I block out the layout and major structures before filling in details.</p></article>
+        <article class="step"><b>03</b><h3>Build it</h3><p>I create the terrain, structures, lighting, and atmosphere.</p></article>
+        <article class="step"><b>04</b><h3>Polish & deliver</h3><p>I refine the map, optimize it, and make agreed revisions.</p></article>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="kicker">NEW QUEST AVAILABLE</p>
+      <h2>LET’S BUILD SOMETHING<br><span>MEMORABLE.</span></h2>
+      <p>Have a map idea or need an environment for your Roblox game? Let’s talk.</p>
+      <div class="buttons" style="justify-content:center;">
+        <a class="button yellow" href="https://discord.com">DISCORD ↗</a>
+        <a class="button blue" href="https://www.roblox.com">ROBLOX PROFILE ↗</a>
+      </div>
+      <p style="font-size:12px;">Replace the Discord and Roblox links with your real links later.</p>
+    </section>
+  </main>
+
+  <footer>
+    <b>MR MEOWS</b>
+    <span>ROBLOX BUILDER • EST. 2024</span>
+    <a href="#">BACK TO TOP ↑</a>
+  </footer>
+
+</body>
+</html>
